@@ -102,12 +102,20 @@ app.use((err,req,res,next)=>{
 })
 
 const PORT = process.env.PORT || 5000;
-const HOSTNAME = "0.0.0.0";
+// const HOSTNAME = "0.0.0.0";
 
 //Always the port must be the first parameter
-app.listen(PORT, HOSTNAME, () => {
-  console.log(
-    `Express server is running in the ${process.env.NODE_ENV} mode at http://${HOSTNAME}:${PORT} 🚀`
-      .yellow.bold
-  );
+app.listen(PORT,  () => {
+  // console.log(
+  //   `Express server is running in the ${process.env.NODE_ENV} mode at http://${HOSTNAME}:${PORT} 🚀`
+  //     .yellow.bold
+  // );
+
+  const baseUrl = process.env.NODE_ENV === 'production' 
+  ? `https://${process.env.DOMAIN}` 
+  : `http://localhost:${PORT}`;
+console.log(
+  `Express server is running in the ${process.env.NODE_ENV} mode at ${baseUrl}  🚀`
+    .yellow.bold
+);
 });
